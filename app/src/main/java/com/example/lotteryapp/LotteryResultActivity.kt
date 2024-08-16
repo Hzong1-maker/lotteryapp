@@ -7,6 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import kotlin.random.Random
@@ -33,6 +35,45 @@ class LotteryResultActivity : AppCompatActivity() {
 
         val notificationMessage = "Welcome，$username！$resultMessage"
         showNotification(notificationMessage)
+
+        val displayButton: Button = findViewById(R.id.display)
+        displayButton.setOnClickListener {
+            val prizeType = when (lotteryNumber) {
+                firstPrize -> 1
+                secondPrize -> 2
+                thirdPrize -> 3
+                else -> 0
+            }
+
+            if (prizeType > 0) {
+                val fragment = PrizeFragment.newInstance(prizeType)
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit()
+            } else {
+                Toast.makeText(this, "You did not win, no prizes displayed", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_lottery_result, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.again -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.exit -> {
+                finishAffinity()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun showNotification(message: String) {
@@ -72,4 +113,5 @@ class LotteryResultActivity : AppCompatActivity() {
 
         notificationManager.notify(notificationId, notification)
     }
+
 }

@@ -12,14 +12,33 @@
         android:text="processing..."
         android:textSize="30sp"
         android:textColor="#122AC3"
+        android:layout_alignParentTop="true"
         android:layout_centerInParent="true"/>
 
-    <ImageView
-        android:id="@+id/trophyImageView"
+<!--    <ImageView-->
+<!--        android:id="@+id/trophyImageView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_above="@id/resultTextView"-->
+<!--        android:layout_marginTop="1dp"-->
+<!--        android:layout_marginBottom="197dp"-->
+<!--        android:src="@drawable/ic_lottery" />-->
+
+    <Button
+        android:id="@+id/display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_lottery"
-        android:layout_above="@id/resultTextView"
+        android:text="display the award"
+        android:layout_below="@id/resultTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginTop="24dp"/>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/display"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/darker_gray" />
 </RelativeLayout>
